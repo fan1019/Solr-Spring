@@ -14,10 +14,11 @@ public class SolrPush {
 	@Test
 	public void test() throws IOException, SolrServerException {
 		SolrClient client = new HttpSolrClient.Builder("http://localhost:8080/solr/solr/").build();
-		SolrInputDocument doc = new SolrInputDocument();
+
 		client.deleteByQuery("*:*");
 		int i = 1;
-		for (String str : Arrays.asList("北大青岛","北大核心","北大法宝","北大荒","北大招生网","北大光华管理学院")) {
+		for (String str : Arrays.asList("北大青岛","北大核心","北大法宝","北大荒","北大招生网","北大光华管理学院","北","北京时间")) {
+			SolrInputDocument doc = new SolrInputDocument();
 			doc.setField("id", i++);
 			doc.setField("title", str);
 			doc.setField("count", 12);
