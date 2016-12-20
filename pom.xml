@@ -85,7 +85,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>1.4.1.RELEASE</version>
-            <scope>test</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
