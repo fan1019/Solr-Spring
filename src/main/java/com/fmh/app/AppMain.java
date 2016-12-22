@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.fmh.action")
 @Configuration
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, SolrAutoConfiguration.class})
-public class AppMain{
+public class AppMain {
 	public static void main(String[] args) {
 		SpringApplication.run(AppMain.class, args);
 	}

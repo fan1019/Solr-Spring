@@ -22,12 +22,13 @@ import java.util.Map;
 @Controller
 @RequestMapping("/suggest")
 public class SuggestAction {
+	private static SolrClient client = new HttpSolrClient.Builder("http://localhost:8080/solr/solr/").build();
 
 	@RequestMapping(value = "/get", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<String> get(HttpServletRequest request, HttpServletResponse response) {
 		String q = request.getParameter("q");
-		SolrClient client = new HttpSolrClient.Builder("http://localhost:8080/solr/solr/").build();
+
 		Map<String, String> queryMap = new HashMap<>();
 		queryMap.put("qt","/suggest");
 		queryMap.put("q", q);
