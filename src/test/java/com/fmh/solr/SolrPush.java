@@ -3,10 +3,12 @@ package com.fmh.solr;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.FacetField;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.SpellCheckResponse;
+import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.params.SolrParams;
 import org.apache.solr.common.util.NamedList;
@@ -70,5 +72,18 @@ public class SolrPush {
 				System.out.println(count.getName() + ":" + count.getCount());
 			}
 		}
+	}
+
+	@Test
+	public void test4() throws IOException, SolrServerException {
+		String zkHostString = "192.168.38.200:2181,192.168.38.202:2181";
+		CloudSolrClient solr = new CloudSolrClient.Builder().withZkHost(zkHostString).build();
+		solr.setDefaultCollection("collection2");
+		for (int i=10; i<=1000; i++) {
+			SolrInputDocument doc = new SolrInputDocument();
+			doc.setField("id", i+"");
+			solr.add(doc);
+		}
+		solr.commit();
 	}
 }
